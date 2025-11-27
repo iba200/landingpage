@@ -1,77 +1,654 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html class="scroll-smooth" lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Votre Entreprise – Présentation</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Alexandre Moreau | Développeur Web Junior</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        dark: '#0F172A',
+                        'dark-lighter': '#1E293B',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        blob: "blob 7s infinite",
+                    },
+                    keyframes: {
+                        blob: {
+                            "0%": { transform: "translate(0px, 0px) scale(1)" },
+                            "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+                            "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+                            "100%": { transform: "translate(0px, 0px) scale(1)" }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, visibility;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #0f172a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555; 
+        }
+    </style>
 </head>
+<body class="bg-slate-50 text-slate-900 dark:bg-dark dark:text-slate-100 transition-colors duration-300">
+<!-- Navbar -->
+<nav class="fixed w-full z-50 transition-all duration-300 bg-white/80 dark:bg-dark/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800" id="navbar">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between h-16 items-center">
+<div class="flex-shrink-0 flex items-center">
+<span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary cursor-pointer" onclick="window.scrollTo(0,0)">AM.</span>
+</div>
+<div class="hidden md:flex space-x-8 items-center">
+<a class="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="#about">À propos</a>
+<a class="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="#projects">Projets</a>
+<a class="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="#skills">Compétences</a>
+<a class="px-4 py-2 rounded-full bg-primary text-white hover:bg-blue-600 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5" href="#contact">Me Contacter</a>
+<!-- Theme Toggle -->
+<button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors focus:outline-none" id="theme-toggle">
+<span class="material-symbols-outlined block dark:hidden text-yellow-500">light_mode</span>
+<span class="material-symbols-outlined hidden dark:block text-blue-300">dark_mode</span>
+</button>
+</div>
+<!-- Mobile menu button -->
+<div class="md:hidden flex items-center">
+<button class="mr-4 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors focus:outline-none" id="theme-toggle-mobile">
+<span class="material-symbols-outlined block dark:hidden text-yellow-500">light_mode</span>
+<span class="material-symbols-outlined hidden dark:block text-blue-300">dark_mode</span>
+</button>
+<button class="text-gray-700 dark:text-gray-300 focus:outline-none" id="mobile-menu-btn">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Mobile Menu -->
+<div class="hidden md:hidden bg-white dark:bg-dark border-t border-gray-200 dark:border-gray-800 absolute w-full shadow-lg" id="mobile-menu">
+<div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+<a class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-800" href="#about">À propos</a>
+<a class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-800" href="#projects">Projets</a>
+<a class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-800" href="#skills">Compétences</a>
+<a class="block px-3 py-2 rounded-md text-base font-medium text-primary font-bold hover:bg-gray-50 dark:hover:bg-gray-800" href="#contact">Me Contacter</a>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="min-h-screen flex items-center justify-center pt-16 relative overflow-hidden">
+<!-- Background Elements -->
+<div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
+<div class="absolute -top-40 -right-40 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+<div class="absolute top-40 -left-20 w-72 h-72 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+<div class="absolute -bottom-20 left-40 w-80 h-80 bg-green-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+</div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+<div class="order-2 md:order-1 fade-in-section">
+<div class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-primary uppercase bg-blue-100 dark:bg-blue-900/30 rounded-full">
+                Développeur Web Junior
+            </div>
+<h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
+                Salut, je suis <span class="text-primary">Alexandre</span>.
+                <br/>
+<span class="text-3xl md:text-5xl text-gray-600 dark:text-gray-400 font-light mt-2 block h-16" id="typewriter"></span>
+</h1>
+<p class="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed max-w-lg">
+                Passionné par la création d'expériences web modernes et intuitives. Je transforme des problèmes complexes en solutions élégantes avec React, Tailwind et Node.js.
+            </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="px-8 py-3 rounded-lg bg-primary text-white font-semibold hover:bg-blue-600 transition-all shadow-lg hover:shadow-primary/50 text-center flex items-center justify-center gap-2" href="#projects">
+<span class="material-symbols-outlined">visibility</span> Voir mes projets
+                </a>
+<a class="px-8 py-3 rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all text-center flex items-center justify-center gap-2" href="https://github.com" target="_blank">
+<span class="material-symbols-outlined">code</span> GitHub
+                </a>
+</div>
+</div>
+<div class="order-1 md:order-2 flex justify-center fade-in-section">
+<div class="relative w-64 h-64 md:w-96 md:h-96">
+<div class="absolute inset-0 bg-gradient-to-tr from-primary to-secondary rounded-[2rem] rotate-6 opacity-50 blur-lg"></div>
+<img alt="Alexandre Moreau" class="relative w-full h-full object-cover rounded-[2rem] shadow-2xl border-4 border-white dark:border-gray-800 transition-transform hover:scale-[1.02] duration-500" go-data-src="/gen?prompt=portrait+of+a+friendly+young+french+web+developer+named+Alexandre+wearing+smart+casual+clothes+in+a+modern+coworking+space+soft+lighting&amp;aspect=1:1" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"/>
+</div>
+</div>
+</div>
+</section>
+<!-- About Section -->
+<section class="py-20 bg-white dark:bg-dark/50" id="about">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16 fade-in-section">
+<h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">À Propos de Moi</h2>
+<div class="w-16 h-1 bg-primary mx-auto rounded-full"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="p-8 bg-gray-50 dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-shadow fade-in-section border border-gray-100 dark:border-gray-700">
+<div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center text-primary mb-6">
+<span class="material-symbols-outlined text-3xl">rocket_launch</span>
+</div>
+<h3 class="text-xl font-bold mb-3 dark:text-white">Autodidacte &amp; Curieux</h3>
+<p class="text-gray-600 dark:text-gray-400">
+                    J'apprends continuellement les nouvelles technologies. En 2025, je me concentre sur l'optimisation des performances et l'accessibilité.
+                </p>
+</div>
+<!-- Card 2 -->
+<div class="p-8 bg-gray-50 dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-shadow fade-in-section border border-gray-100 dark:border-gray-700 delay-100">
+<div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center text-green-600 mb-6">
+<span class="material-symbols-outlined text-3xl">terminal</span>
+</div>
+<h3 class="text-xl font-bold mb-3 dark:text-white">Code Propre</h3>
+<p class="text-gray-600 dark:text-gray-400">
+                    Je m'efforce d'écrire un code maintenable, réutilisable et bien documenté, en suivant les meilleures pratiques (DRY, KISS).
+                </p>
+</div>
+<!-- Card 3 -->
+<div class="p-8 bg-gray-50 dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-shadow fade-in-section border border-gray-100 dark:border-gray-700 delay-200">
+<div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center text-purple-600 mb-6">
+<span class="material-symbols-outlined text-3xl">group</span>
+</div>
+<h3 class="text-xl font-bold mb-3 dark:text-white">Esprit d'Équipe</h3>
+<p class="text-gray-600 dark:text-gray-400">
+                    J'aime collaborer, faire des revues de code et partager mes connaissances. La communication est clé pour la réussite d'un projet.
+                </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Skills Section -->
+<section class="py-20 relative" id="skills">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16 fade-in-section">
+<h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Mes Compétences</h2>
+<div class="w-16 h-1 bg-primary mx-auto rounded-full"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 fade-in-section">
+<!-- Skill Category: Frontend -->
+<div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border-t-4 border-blue-500">
+<h3 class="text-lg font-bold mb-4 flex items-center gap-2 dark:text-white">
+<span class="material-symbols-outlined">html</span> Front-End
+                </h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-300">HTML5</span>
+<span class="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-300">CSS3 / SASS</span>
+<span class="px-3 py-1 text-sm bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-full font-medium">React.js</span>
+<span class="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-300">Tailwind CSS</span>
+<span class="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-300">Vue.js</span>
+</div>
+</div>
+<!-- Skill Category: Backend -->
+<div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border-t-4 border-green-500">
+<h3 class="text-lg font-bold mb-4 flex items-center gap-2 dark:text-white">
+<span class="material-symbols-outlined">dns</span> Back-End
+                </h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 text-sm bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300 rounded-full font-medium">Node.js</span>
+<span class="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-300">Express</span>
+<span class="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-300">MongoDB</span>
+<span class="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-300">Firebase</span>
+<span class="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-300">REST API</span>
+</div>
+</div>
+<!-- Skill Category: Tools -->
+<div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border-t-4 border-purple-500">
+<h3 class="text-lg font-bold mb-4 flex items-center gap-2 dark:text-white">
+<span class="material-symbols-outlined">build</span> Outils
+                </h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 text-sm bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 rounded-full font-medium">Git / GitHub</span>
+<span class="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-300">VS Code</span>
+<span class="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-300">Figma</span>
+<span class="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-300">Postman</span>
+<span class="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-300">Vite</span>
+</div>
+</div>
+<!-- Skill Category: Soft Skills -->
+<div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border-t-4 border-yellow-500">
+<h3 class="text-lg font-bold mb-4 flex items-center gap-2 dark:text-white">
+<span class="material-symbols-outlined">psychology</span> Soft Skills
+                </h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-300">Agile / Scrum</span>
+<span class="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-300">Autonomie</span>
+<span class="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-300">Anglais Technique</span>
+<span class="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-300">Résolution de problèmes</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Projects Section -->
+<section class="py-20 bg-gray-50 dark:bg-dark/50" id="projects">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-12 fade-in-section">
+<h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Mes Projets</h2>
+<div class="w-16 h-1 bg-primary mx-auto rounded-full mb-8"></div>
+<!-- Filters -->
+<div class="flex flex-wrap justify-center gap-2 mb-8" id="portfolio-filters">
+<button class="filter-btn active px-4 py-2 rounded-full text-sm font-medium transition-all bg-primary text-white shadow-md" data-filter="all">Tous</button>
+<button class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition-all bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700" data-filter="react">React</button>
+<button class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition-all bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700" data-filter="vue">Vue/JS</button>
+<button class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition-all bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700" data-filter="ui">UI/UX</button>
+</div>
+</div>
+<!-- Projects Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+<!-- Projects injected by JS -->
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section class="py-20" id="contact">
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden fade-in-section">
+<div class="grid grid-cols-1 md:grid-cols-2">
+<div class="p-10 bg-gradient-to-br from-primary to-blue-600 text-white flex flex-col justify-between">
+<div>
+<h3 class="text-2xl font-bold mb-4">Discutons de votre projet</h3>
+<p class="text-blue-100 mb-8">
+                            Je suis actuellement disponible pour des opportunités en freelance ou en CDI. N'hésitez pas à me contacter !
+                        </p>
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">mail</span>
+<span>alexandre.moreau@example.com</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">location_on</span>
+<span>Paris, France &amp; Remote</span>
+</div>
+</div>
+</div>
+<div class="mt-12 flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">code</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">work</span>
+</a>
+</div>
+</div>
+<div class="p-10">
+<form class="space-y-6" id="contact-form">
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Votre Nom</label>
+<input class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" required="" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+<input class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" required="" type="email"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Message</label>
+<textarea class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" required="" rows="4"></textarea>
+</div>
+<button class="w-full bg-gray-900 dark:bg-white dark:text-gray-900 text-white font-bold py-3 rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2" type="submit">
+<span>Envoyer le message</span>
+<span class="material-symbols-outlined text-sm">send</span>
+</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+</section>
+<footer class="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 py-12">
+<div class="max-w-7xl mx-auto px-4 text-center">
+<p class="text-gray-500 dark:text-gray-400">© 2025 Alexandre Moreau. Créé avec ❤️, HTML &amp; Tailwind.</p>
+</div>
+</footer>
+<!-- Project Modal -->
+<div aria-labelledby="modal-title" aria-modal="true" class="fixed inset-0 z-[60] hidden overflow-y-auto" id="project-modal" role="dialog">
+<div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+<div aria-hidden="true" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" onclick="closeModal()"></div>
+<span aria-hidden="true" class="hidden sm:inline-block sm:align-middle sm:h-screen">​</span>
+<div class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
+<div class="relative">
+<img alt="Project Header" class="w-full h-64 object-cover" id="modal-img" src=""/>
+<button class="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white rounded-full p-1 transition-colors" onclick="closeModal()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="px-6 py-6 sm:px-8">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-2xl font-bold text-gray-900 dark:text-white" id="modal-title">Project Title</h3>
+<div class="flex gap-2" id="modal-tags">
+<!-- Tags injected here -->
+</div>
+</div>
+<div class="prose dark:prose-invert max-w-none">
+<p class="text-gray-600 dark:text-gray-300 mb-6" id="modal-desc"></p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+<div class="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg">
+<h4 class="font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">psychology</span> Challenge
+                            </h4>
+<p class="text-sm text-gray-600 dark:text-gray-400" id="modal-challenge"></p>
+</div>
+<div class="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg">
+<h4 class="font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-sm">check_circle</span> Solution
+                            </h4>
+<p class="text-sm text-gray-600 dark:text-gray-400" id="modal-solution"></p>
+</div>
+</div>
+</div>
+<div class="mt-8 flex justify-end gap-3">
+<button class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" onclick="closeModal()">Fermer</button>
+<button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center gap-2">
+<span>Voir le site</span>
+<span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+        // Data
+        const projects = [
+            {
+                id: 1,
+                title: "TaskFlow Manager",
+                category: "react",
+                image: "https://images.unsplash.com/photo-1540350394557-8d14678e7f91?auto=format&fit=crop&q=80&w=1000",
+                desc: "Une application de gestion de tâches inspirée de Trello avec glisser-déposer.",
+                tags: ["React", "Redux", "Tailwind"],
+                challenge: "Gérer l'état complexe des tâches et la persistance des données lors du drag-and-drop.",
+                solution: "Utilisation de Redux Toolkit pour un état global robuste et de LocalStorage pour la persistance."
+            },
+            {
+                id: 2,
+                title: "EcoTrack",
+                category: "ui",
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000",
+                desc: "Calculateur d'empreinte carbone personnel avec visualisation de données.",
+                tags: ["UI Design", "Figma", "Chart.js"],
+                challenge: "Rendre des données ennuyeuses (statistiques) attrayantes et compréhensibles pour l'utilisateur.",
+                solution: "Design minimaliste vert/blanc et graphiques interactifs animés."
+            },
+            {
+                id: 3,
+                title: "CineScope",
+                category: "react",
+                image: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=1000",
+                desc: "Explorateur de films utilisant l'API TMDB avec recherche et favoris.",
+                tags: ["React", "API", "Framer Motion"],
+                challenge: "Optimiser le chargement des images et la fluidité du scroll infini.",
+                solution: "Implémentation du Lazy Loading et de la pagination via l'API."
+            },
+            {
+                id: 4,
+                title: "Weather Glass",
+                category: "vue",
+                image: "https://images.unsplash.com/photo-1592210454359-9043f067919b?auto=format&fit=crop&q=80&w=1000",
+                desc: "Widget météo élégant utilisant le style Glassmorphism.",
+                tags: ["Vue.js", "CSS3", "OpenWeather"],
+                challenge: "Créer un effet de verre réaliste compatible avec tous les navigateurs.",
+                solution: "Utilisation avancée de backdrop-filter et de dégradés CSS semi-transparents."
+            },
+            {
+                id: 5,
+                title: "Sneaker Shop",
+                category: "vue",
+                image: "https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&q=80&w=1000",
+                desc: "Site e-commerce monopage pour une marque de chaussures urbaines.",
+                tags: ["Vue.js", "Stripe", "Node.js"],
+                challenge: "Intégrer un panier dynamique et un paiement sécurisé.",
+                solution: "Gestion du panier avec Vuex et intégration de l'API Stripe Checkout."
+            },
+             {
+                id: 6,
+                title: "Chat Connect",
+                category: "ui",
+                image: "https://images.unsplash.com/photo-1611606063065-ee7946f0787a?auto=format&fit=crop&q=80&w=1000",
+                desc: "Interface de messagerie instantanée en temps réel.",
+                tags: ["UI/UX", "Mobile First", "Socket.io"],
+                challenge: "Assurer une expérience fluide sur mobile avec des claviers virtuels.",
+                solution: "Design adaptatif et gestion précise des événements de focus/scroll."
+            }
+        ];
 
-<body class="bg-gray-50 text-gray-800">
+        // Typewriter Effect
+        const words = ["Créatif.", "Passionné.", "Rigoureux.", "Curieux."];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typeSpeed = 100;
+        const deleteSpeed = 50;
+        const waitTime = 2000;
+        
+        function typeWriter() {
+            const currentWord = words[wordIndex];
+            const element = document.getElementById('typewriter');
+            
+            if (!element) return; // Guard clause if element missing
 
-  <!-- HERO -->
-  <section class="relative bg-gradient-to-br from-[#FFC7C7] to-[#FFE2E2] py-24 px-6 text-center">
-    <h1 class="text-4xl font-bold mb-4">Boostez Votre Visibilité</h1>
-    <p class="max-w-xl mx-auto text-lg opacity-80">
-      Une landing page moderne, rapide et professionnelle pour votre entreprise.  
-      Attirez plus de clients en quelques jours.
-    </p>
-    <a href="#contact" class="mt-6 inline-block bg-[#8785A2] text-white px-6 py-3 rounded-xl shadow-lg">
-      Demander votre site
-    </a>
-  </section>
+            if (isDeleting) {
+                element.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                element.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
 
-  <!-- SERVICES -->
-  <section class="py-20 px-6">
-    <h2 class="text-3xl font-semibold text-center mb-10">Ce que vous obtenez</h2>
-    <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            let typeDelay = isDeleting ? deleteSpeed : typeSpeed;
 
-      <div class="bg-white p-6 rounded-2xl shadow">
-        <h3 class="text-xl font-semibold mb-2">Design Moderne</h3>
-        <p class="opacity-75">Un style professionnel adapté à votre activité.</p>
-      </div>
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeDelay = waitTime;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                typeDelay = 500;
+            }
 
-      <div class="bg-white p-6 rounded-2xl shadow">
-        <h3 class="text-xl font-semibold mb-2">100% Responsive</h3>
-        <p class="opacity-75">Votre site s’affiche parfaitement sur mobile et ordinateur.</p>
-      </div>
+            setTimeout(typeWriter, typeDelay);
+        }
 
-      <div class="bg-white p-6 rounded-2xl shadow">
-        <h3 class="text-xl font-semibold mb-2">Optimisé pour Google</h3>
-        <p class="opacity-75">Vos clients vous trouvent facilement.</p>
-      </div>
+        // Project Rendering
+        function renderProjects(filter = 'all') {
+            const grid = document.getElementById('projects-grid');
+            if(!grid) return;
+            grid.innerHTML = '';
+            
+            const filteredProjects = filter === 'all' 
+                ? projects 
+                : projects.filter(p => p.category === filter);
 
-    </div>
-  </section>
+            filteredProjects.forEach((p, index) => {
+                const card = document.createElement('div');
+                card.className = 'group bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer fade-in-section';
+                card.style.animationDelay = `${index * 100}ms`;
+                card.onclick = () => openModal(p);
+                
+                card.innerHTML = `
+                    <div class="relative overflow-hidden h-48">
+                        <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="text-white font-semibold flex items-center gap-1">
+                                <span class="material-symbols-outlined">info</span> Détails
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-lg font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors">${p.title}</h3>
+                            <span class="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-gray-500 dark:text-gray-400 uppercase font-semibold tracking-wide">${p.tags[0]}</span>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">${p.desc}</p>
+                        <div class="flex gap-2">
+                            ${p.tags.slice(1).map(t => `<span class="text-xs text-blue-500 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded border border-blue-100 dark:border-blue-900/50">${t}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+            
+            setupIntersectionObserver();
+        }
 
-  <!-- A PROPOS -->
-  <section class="bg-[#F6F6F6] py-20 px-6">
-    <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-      <div>
-        <h2 class="text-3xl font-semibold mb-4">Pourquoi un site?</h2>
-        <p class="opacity-80 mb-4">
-          70% des clients vérifient en ligne avant d’acheter.  
-          Sans site, vous perdez des clients chaque jour.
-        </p>
-        <p class="opacity-80">Rendez votre entreprise crédible, accessible et visible.</p>
-      </div>
+        // Modal Logic
+        function openModal(project) {
+            document.getElementById('modal-img').src = project.image;
+            document.getElementById('modal-title').innerText = project.title;
+            document.getElementById('modal-desc').innerText = project.desc;
+            document.getElementById('modal-challenge').innerText = project.challenge;
+            document.getElementById('modal-solution').innerText = project.solution;
+            
+            const tagsContainer = document.getElementById('modal-tags');
+            tagsContainer.innerHTML = project.tags.map(t => 
+                `<span class="px-2 py-1 bg-primary text-white text-xs rounded-md">${t}</span>`
+            ).join('');
+            
+            document.getElementById('project-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; 
+        }
 
-      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
-           class="w-full rounded-2xl shadow" alt="Illustration" />
-    </div>
-  </section>
+        function closeModal() {
+            document.getElementById('project-modal').classList.add('hidden');
+            document.body.style.overflow = ''; 
+        }
 
-  <!-- CONTACT -->
-  <section id="contact" class="py-20 px-6 text-center">
-    <h2 class="text-3xl font-semibold mb-6">Intéressé(e) ?</h2>
-    <p class="opacity-80 mb-8">Contactez-moi pour créer votre landing page.</p>
+        // Filter Logic
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('active', 'bg-primary', 'text-white', 'shadow-md');
+                    b.classList.add('bg-white', 'dark:bg-gray-800', 'text-gray-600', 'dark:text-gray-300');
+                });
+                e.target.classList.remove('bg-white', 'dark:bg-gray-800', 'text-gray-600', 'dark:text-gray-300');
+                e.target.classList.add('active', 'bg-primary', 'text-white', 'shadow-md');
+                
+                renderProjects(e.target.dataset.filter);
+            });
+        });
 
-    <a href="https://wa.me/221770000000" 
-       class="bg-[#8785A2] text-white px-6 py-3 rounded-xl shadow-lg">
-      Me contacter sur WhatsApp
-    </a>
-  </section>
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        }
 
+        if(themeToggle) themeToggle.addEventListener('click', toggleTheme);
+        if(themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
+
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if(mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Scroll Animations
+        function setupIntersectionObserver() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+        }
+
+        // Contact Form
+        const form = document.getElementById('contact-form');
+        if(form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = e.target.querySelector('button');
+                const originalText = btn.innerHTML;
+                
+                btn.innerHTML = `<span class="material-symbols-outlined animate-spin">refresh</span> Envoi...`;
+                btn.disabled = true;
+                
+                setTimeout(() => {
+                    btn.innerHTML = `<span class="material-symbols-outlined">check_circle</span> Message Envoyé !`;
+                    btn.classList.remove('bg-gray-900', 'dark:bg-white', 'text-white', 'dark:text-gray-900');
+                    btn.classList.add('bg-green-500', 'text-white');
+                    e.target.reset();
+                    
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.classList.add('bg-gray-900', 'dark:bg-white', 'text-white', 'dark:text-gray-900');
+                        btn.classList.remove('bg-green-500', 'text-white');
+                        btn.disabled = false;
+                    }, 3000);
+                }, 1500);
+            });
+        }
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if(nav) {
+                if (window.scrollY > 20) {
+                    nav.classList.add('shadow-md');
+                } else {
+                    nav.classList.remove('shadow-md');
+                }
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProjects();
+            typeWriter();
+            setupIntersectionObserver();
+        });
+
+    </script>
 </body>
 </html>
-
